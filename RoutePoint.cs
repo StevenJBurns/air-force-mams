@@ -1,32 +1,18 @@
 namespace MAMS
-
+  {
+  public class RoutePoint : System.ICloneable
     {
+    private double x, y;
+    
+    public double X
+      {
+        get
+          { return x; }
+        set
+          { x = value; }
+      }
 
-    public class RoutePoint : System.ICloneable
-
-        {
-
-        private double x, y;
-
-        
-
-        public double X
-
-            {
-
-            get
-
-            { return x; }
-
-            set
-
-            { x = value; }
-
-            }
-
-
-
-        public double Y
+    public double Y
 
             {
 
@@ -209,39 +195,14 @@ namespace MAMS
 
 
         public bool OnLine(RoutePoint point)
-
-            {
-
-            return System.Math.Abs((a * point.X) + (b * point.Y) - c) < 0.000000001;
-
-            }
-
-
+          {return System.Math.Abs((a * point.X) + (b * point.Y) - c) < 0.000000001;}
 
         public bool OnSegment(RoutePoint point)
+          {
+          if (!OnLine(point))
+            {return false;}
 
-            {
-
-            if (!OnLine(point))
-
-                {return false;}
-
-
-
-            return  (System.Math.Min(p1.X, p2.X) <= point.X) &&
-
-                    (System.Math.Max(p1.X, p2.X) >= point.X) && 
-
-                    (System.Math.Min(p1.Y, p2.Y) <= point.Y) &&
-
-                    (System.Math.Max(p1.Y, p2.Y) >= point.Y);
-
-            }
-
-
-
-
-
+          return (System.Math.Min(p1.X, p2.X) <= point.X) && (System.Math.Max(p1.X, p2.X) >= point.X) && (System.Math.Min(p1.Y, p2.Y) <= point.Y) && (System.Math.Max(p1.Y, p2.Y) >= point.Y);
+          }
         }
-
     }
